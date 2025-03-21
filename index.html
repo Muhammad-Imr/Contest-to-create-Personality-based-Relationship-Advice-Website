@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relationship Harmony</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    .navbar {
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .navbar-brand {
+      font-weight: bold;
+      color: #e83e8c !important;
+    }
+    .section {
+      padding: 60px 0;
+    }
+    .section h2 {
+      margin-bottom: 30px;
+      font-weight: bold;
+      color: #e83e8c;
+    }
+    .test-card {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .test-card:hover {
+      transform: translateY(-10px);
+    }
+    .test-card h3 {
+      color: #e83e8c;
+    }
+    .footer {
+      background-color: #343a40;
+      color: #ffffff;
+      padding: 20px 0;
+    }
+    .footer a {
+      color: #e83e8c;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    .test-container {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .progress-bar {
+      height: 10px;
+      background-color: #e9ecef;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .progress {
+      height: 100%;
+      background-color: #e83e8c;
+      width: 0;
+      transition: width 0.3s ease;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .option {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .option:hover {
+      background-color: #f8f9fa;
+    }
+    .option.selected {
+      background-color: #e83e8c;
+      color: #fff;
+    }
+    .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .result-container {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .result-container h3 {
+      color: #e83e8c;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Relationship Harmony</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#tests">Tests</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#take-test">Take the Test</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#account">Account</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section id="about" class="section">
+    <div class="container">
+      <h2>About Relationship Harmony</h2>
+      <p>Relationship Harmony is dedicated to helping couples navigate their relationships by providing personalized advice based on personality tests.</p>
+    </div>
+  </section>
+
+  <section id="tests" class="section bg-light">
+    <div class="container">
+      <h2>About the Tests</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="test-card">
+            <h3>MBTI Personality Typing</h3>
+            <p>Discover your personality type and how it influences your relationship.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="test-card">
+            <h3>Love Languages</h3>
+            <p>Learn how you and your partner express and receive love.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="test-card">
+            <h3>Big 5 Test</h3>
+            <p>Understand the five key dimensions of your personality.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="take-test" class="section">
+    <div class="container">
+      <h2>Take the Test</h2>
+      <div class="test-container">
+        <div class="progress-bar">
+          <div class="progress" id="progress"></div>
+        </div>
+        <div class="question" id="question">
+          <h4 id="question-text"></h4>
+          <div class="options" id="options"></div>
+        </div>
+        <div class="navigation-buttons">
+          <button class="btn btn-secondary" id="prev-btn" disabled>Previous</button>
+          <button class="btn btn-primary" id="next-btn">Next</button>
+        </div>
+        <div class="result-container" id="result-container">
+          <h3>Your Results</h3>
+          <p id="result-text"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="account" class="section bg-light">
+    <div class="container">
+      <h2>Create an Account</h2>
+      <form>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer text-center">
+    <div class="container">
+      <p>&copy; 2023 Relationship Harmony. All rights reserved.</p>
+      <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const questions = [
+      { text: "Question 1: What is your favorite way to spend time with your partner?", options: ["Going out for dinner", "Watching movies at home", "Taking a walk together", "Traveling to new places"] },
+      { text: "Question 2: How do you handle conflicts in your relationship?", options: ["Discuss calmly", "Avoid confrontation", "Seek mediation", "Take time apart"] },
+      { text: "Question 3: What is your love language?", options: ["Words of affirmation", "Acts of service", "Receiving gifts", "Quality time"] },
+    ];
+
+    let currentQuestion = 0;
+    const progressBar = document.getElementById("progress");
+    const questionText = document.getElementById("question-text");
+    const optionsContainer = document.getElementById("options");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const resultContainer = document.getElementById("result-container");
+    const resultText = document.getElementById("result-text");
+    const userAnswers = [];
+
+    function loadQuestion() {
+      const question = questions[currentQuestion];
+      questionText.textContent = question.text;
+      optionsContainer.innerHTML = question.options.map((option, index) => `<div class="option" data-value="${index + 1}">${option}</div>`).join("");
+      updateProgress();
+      updateButtons();
+    }
+
+    function updateProgress() {
+      const progress = ((currentQuestion + 1) / questions.length) * 100;
+      progressBar.style.width = `${progress}%`;
+    }
+
+    function updateButtons() {
+      prevBtn.disabled = currentQuestion === 0;
+      nextBtn.disabled = currentQuestion === questions.length - 1;
+      if (currentQuestion === questions.length - 1) {
+        nextBtn.textContent = "Submit";
+      } else {
+        nextBtn.textContent = "Next";
+      }
+    }
+
+    function showResult() {
+      resultContainer.style.display = "block";
+      resultText.textContent = `You scored ${userAnswers.filter(Boolean).length} out of ${questions.length}!`;
+    }
+
+    optionsContainer.addEventListener("click", (e) => {
+      if (e.target.classList.contains("option")) {
+        document.querySelectorAll(".option").forEach((option) => option.classList.remove("selected"));
+        e.target.classList.add("selected");
+        userAnswers[currentQuestion] = e.target.dataset.value;
+      }
+    });
+
+    prevBtn.addEventListener("click", () => {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        loadQuestion();
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    loadQuestion();
+  </script>
+</body>
+</html>
